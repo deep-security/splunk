@@ -1,0 +1,175 @@
+<form>
+  <label>Deep Security Firewall Dashboard</label>
+  <fieldset submitButton="false">
+    <input type="time" token="timeframe">
+      <label>Time Frame</label>
+      <default>
+        <earliestTime>-24h@h</earliestTime>
+        <latestTime>now</latestTime>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <map>
+        <title>Firewall Events by Location</title>
+        <search>
+          <query>sourcetype=deepsecurity-firewall src!="N/A" | iplocation src | geostats count by src globallimit=0 | sort -count</query>
+          <earliest>$timeframe.earliest$</earliest>
+          <latest>$timeframe.latest$</latest>
+        </search>
+        <option name="mapping.data.maxClusters">100</option>
+        <option name="mapping.map.center">(0,0)</option>
+        <option name="mapping.map.zoom">2</option>
+        <option name="mapping.markerLayer.markerMaxSize">50</option>
+        <option name="mapping.markerLayer.markerMinSize">10</option>
+        <option name="mapping.markerLayer.markerOpacity">0.8</option>
+        <option name="mapping.tileLayer.maxZoom">7</option>
+        <option name="mapping.tileLayer.minZoom">0</option>
+        <option name="drilldown">all</option>
+      </map>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Firewall Event History</title>
+        <searchString>sourcetype=deepsecurity-firewall | timechart count by act limit=10</searchString>
+        <earliestTime>$timeframe.earliest$</earliestTime>
+        <latestTime>$timeframe.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.text">Hour</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.text">Events</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Firewall Activity (Prevented)</title>
+        <searchString>sourcetype=deepsecurity-firewall act="Deny"| top limit=5 cef_rulename | rename cef_rulename AS "Event Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <earliestTime>$timeframe.earliest$</earliestTime>
+        <latestTime>$timeframe.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Firewall Activity (Detected)</title>
+        <searchString>sourcetype=deepsecurity-firewall act="IDS:Deny"| top limit=5 cef_rulename | rename cef_rulename AS "Event Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <earliestTime>$timeframe.earliest$</earliestTime>
+        <latestTime>$timeframe.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Firewall IP Activity (Prevented)</title>
+        <searchString>sourcetype=deepsecurity-firewall act="Deny" src!="N/A"| top limit=5 src  | rename src AS "Source IP" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <earliestTime>$timeframe.earliest$</earliestTime>
+        <latestTime>$timeframe.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Firewall IP Activity (Detected)</title>
+        <searchString>sourcetype=deepsecurity-firewall act="IDS:Deny" src!="N/A"| top limit=5 src | rename src AS "Source IP" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <earliestTime>$timeframe.earliest$</earliestTime>
+        <latestTime>$timeframe.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Firewall Computer Activity (Prevented)</title>
+        <searchString>sourcetype=deepsecurity-firewall act="Deny" | top limit=5 dvchost | rename dvchost AS "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <earliestTime>$timeframe.earliest$</earliestTime>
+        <latestTime>$timeframe.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Firewall Computer Activity (Detected)</title>
+        <searchString>sourcetype=deepsecurity-firewall act="IDS:Deny" | top limit=5 dvchost | rename dvchost AS "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <earliestTime>$timeframe.earliest$</earliestTime>
+        <latestTime>$timeframe.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Firewall Port Activity (Prevented)</title>
+        <searchString>sourcetype=deepsecurity-firewall act="Deny" dpt &gt; 0 dpt!="N/A"| top limit=5 dpt | rename dpt as "Destination Port" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <earliestTime>$timeframe.earliest$</earliestTime>
+        <latestTime>$timeframe.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Firewall Port Activity (Detected)</title>
+        <searchString>sourcetype=deepsecurity-firewall act="IDS:Deny" dpt &gt; 0 dpt!="N/A"| top limit=5 dpt | rename dpt as "Destination Port" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <earliestTime>$timeframe.earliest$</earliestTime>
+        <latestTime>$timeframe.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>
