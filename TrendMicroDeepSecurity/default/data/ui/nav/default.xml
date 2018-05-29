@@ -1,0 +1,28 @@
+<nav color="#db3d44">
+	<view name="flashtimeline" default='true' />
+	<collection label="Dashboards">
+		<view name="deepsecurity_antimalware_dashboard" />
+		<view name="deepsecurity_firewall_dashboard" />
+		<view name="deepsecurity_ips_dashboard" />
+		<view name="deepsecurity_integritymonitoring_dashboard" />
+		<view name="deepsecurity_loginspection_dashboard" />
+        <view name="deepsecurity_webreputation_dashboard" />
+	</collection>
+	<collection label="Saved Searches">
+        <collection label="Security Events">
+            <saved source="unclassified" match="Deep Security - High Severity Events"/>
+            <saved source="unclassified" match="Deep Security - All Security Events" />
+            <collection label="Module Events">
+                <saved source="unclassified" match="Deep Security - Anti-Malware Events" />
+                <saved source="unclassified" match="Deep Security - Firewall Events" />
+			    <saved source="unclassified" match="Deep Security - Intrusion Prevention Events" />
+			    <saved source="unclassified" match="Deep Security - Integrity Monitoring Events" />
+			    <saved source="unclassified" match="Deep Security - Log Inspection Events" />
+			    <saved source="unclassified" match="Deep Security - Web Reputation Events" />
+            </collection>
+		</collection>
+        <collection label="System Events">
+            <saved source="unclassified" match="Deep Security - System Events" />
+        </collection>
+	</collection>
+</nav>
