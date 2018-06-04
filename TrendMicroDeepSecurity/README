@@ -1,3 +1,9 @@
+Version 1.6.0: May 14, 2018
+- Added "Deep Security Application Control Dashboard"
+- Fixed incorrect transformation for system events
+- Fixed label/title inconsistancy between dashboards
+- Fixed saved searches "All Security Events" and "High Severity Events" to exclude system events as expected
+
 Version 1.5.2: April 4, 2016
 - Fixed a typo in the transforms.conf for web reputation events. Credit to Chris Bell for reporting the error.
 
