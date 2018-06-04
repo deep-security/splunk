@@ -1,5 +1,5 @@
 <form>
-  <label>Deep Security Anti-Malware Dashboard</label>
+  <label>Deep Security Application Control Dashboard</label>
   <fieldset submitButton="false">
     <input type="time" token="timeframe">
       <label>Time Frame</label>
@@ -12,8 +12,8 @@
   <row>
     <panel>
       <chart>
-        <title>Anti-Malware Event History</title>
-        <searchString>sourcetype=deepsecurity-antimalware | timechart count by act limit=10</searchString>
+        <title>Application Control Event History</title>
+        <searchString>sourcetype=deepsecurity-app_control | timechart count by act limit=10</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -42,8 +42,8 @@
   <row>
     <panel>
       <table>
-        <title>Anti-Malware Activity</title>
-        <searchString>sourcetype=deepsecurity-antimalware | top limit=5 cef_rulename | rename cef_rulename as "Malware Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <title>Application Control Activity</title>
+        <searchString>sourcetype=deepsecurity-app_control | top limit=5 cef_rulename | rename cef_rulename as "Event Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -55,8 +55,8 @@
     </panel>
     <panel>
       <table>
-        <title>Anti-Malware Computer Activity</title>
-        <searchString>sourcetype=deepsecurity-antimalware | top limit=5 dvchost | rename dvchost as "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <title>Application Control Computer Activity</title>
+        <searchString>sourcetype=deepsecurity-app_control | top limit=5 dvchost | rename dvchost as "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
