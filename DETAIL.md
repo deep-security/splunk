@@ -44,8 +44,8 @@ Example:
 
 Using the message above as an example, the add-on extracts the following custom key/value pairs:
 
-Host_ID=1
-Fragmentation Bits=DF
-Intrusion Prevention Packet Position=10
-Intrusion Prevention Stream Position=10
-Intrusion Prevention Flags=8
+* <code>Host_ID=1</code>
+* <code>Fragmentation Bits=DF</code>
+* <code>Intrusion Prevention Packet Position=10</code>
+* <code>Intrusion Prevention Stream Position=10</code>
+* <code>Intrusion Prevention Flags=8</code>
