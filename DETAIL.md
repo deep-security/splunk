@@ -7,6 +7,8 @@ This package contains parsing logic, saved searches, and dashboards for monitori
 
 Please read the [Installation](#installation) section below for details on how to configure Deep Security to use this app.
 
+To contribute this app, see https://github.com/deep-security/splunk.
+
 ![](/screenshots/antimalware_dashboard.png) 
 
 ![](/screenshots/ips_dashboard.png)
