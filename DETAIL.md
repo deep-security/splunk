@@ -9,9 +9,9 @@ Please read the [Installation](#installation) section below for details on how t
 
 To contribute this app, see https://github.com/deep-security/splunk.
 
-![](/screenshots/antimalware_dashboard.png) 
+![](https://github.com/deep-security/splunk/blob/master/screenshots/antimalware_dashboard.png?raw=true)
 
-![](/screenshots/ips_dashboard.png)
+![](https://github.com/deep-security/splunk/blob/master/screenshots/ips_dashboard.png?raw=true)
 
 <a name="installation"></a>Installation
 ------------
