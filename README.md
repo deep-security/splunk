@@ -2,6 +2,8 @@
 
 This package contains parsing logic, saved searches, and dashboards for monitoring Trend Micro Deep Security via Splunk.
 
+It only supports CEF(Common Event Format) format.
+
 ## Support
 
 This is a community project initially built by Mike Gibson and supported by the Deep Security team.
