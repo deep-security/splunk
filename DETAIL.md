@@ -36,7 +36,7 @@ This change helps make the app compatible with both Splunk Enterprise and Splunk
 
 Usage
 ------------
-You can configure Deep Security to send event data in Common Event Format (CEF). This add-on parses the various syslog messages and extracts the appropriate fields, including the custom key/value pairs.
+Please configure Deep Security to send event data in Common Event Format (CEF). This add-on parses the various syslog messages and extracts the appropriate fields, including the custom key/value pairs.
 
 Example:
 
