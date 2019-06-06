@@ -1,6 +1,6 @@
-# Splunk for Deep Security
+# Graylog for Deep Security
 
-This repository contains parsing logic, saved searches, and dashboards for monitoring Trend Micro Deep Security via Splunk.
+This repository contains parsing logic, saved searches, and dashboards for monitoring Trend Micro Deep Security via Graylog.
 
 ## Table of Contents
 
@@ -10,13 +10,7 @@ This repository contains parsing logic, saved searches, and dashboards for monit
 
 ## Usage
 
-To use the Splunk app directly, see https://splunkbase.splunk.com/app/1936/.
-
-To pack the files as a Splunk app, use the following command:
-```shell
-tar cvfz trend-micro-deep-security-for-splunk_xxx.tgz TrendMicroDeepSecurity
-```
-
+TO DO.
 
 ## Support
 
