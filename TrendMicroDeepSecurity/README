@@ -1,3 +1,1 @@
-This package contains parsing logic, saved searches, and dashboards for monitoring Trend Micro Deep Security via Splunk.
-
-Please refer to https://github.com/deep-security/splunk/releases for complete change log.
+This package contains parsing logic, saved searches, and dashboards for monitoring Trend Micro Deep Security via Graylog.
