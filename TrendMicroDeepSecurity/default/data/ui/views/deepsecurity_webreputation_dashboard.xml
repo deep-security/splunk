@@ -15,7 +15,7 @@
     <panel>
       <chart>
         <title>Web Reputation Event History</title>
-        <searchString>sourcetype=deepsecurity-web_reputation| timechart count by msg limit=10</searchString>
+        <searchString>(sourcetype=deepsecurity-web_reputation OR sourcetype=deepsecurity-web_reputation:json) | timechart count by msg limit=10</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -45,7 +45,7 @@
     <panel>
       <table>
         <title>Web Reputation URL Activity</title>
-        <searchString>sourcetype=deepsecurity-web_reputation| top limit=5 request | rename request AS "URL" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-web_reputation OR sourcetype=deepsecurity-web_reputation:json) | top limit=5 url | rename url AS "URL" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -58,7 +58,7 @@
     <panel>
       <table>
         <title>Web Reputation Computer Activity</title>
-        <searchString>sourcetype=deepsecurity-web_reputation| top limit=5 dvchost | rename dvchost AS "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-web_reputation OR sourcetype=deepsecurity-web_reputation:json) | top limit=5 dvchost | rename dvchost AS "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>

@@ -14,7 +14,7 @@
     <panel>
       <chart>
         <title>Application Control Event History</title>
-        <searchString>sourcetype=deepsecurity-app_control | timechart count by act limit=10</searchString>
+        <searchString>(sourcetype=deepsecurity-app_control OR sourcetype=deepsecurity-app_control:json) | timechart count by action limit=10</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -44,7 +44,7 @@
     <panel>
       <table>
         <title>Application Control Activity</title>
-        <searchString>sourcetype=deepsecurity-app_control | top limit=5 cef_rulename | rename cef_rulename as "Event Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-app_control OR sourcetype=deepsecurity-app_control:json) | top limit=5 signature | rename signature as "Event Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -57,7 +57,7 @@
     <panel>
       <table>
         <title>Application Control Computer Activity</title>
-        <searchString>sourcetype=deepsecurity-app_control | top limit=5 dvchost | rename dvchost as "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-app_control OR sourcetype=deepsecurity-app_control:json) | top limit=5 dvchost | rename dvchost as "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
