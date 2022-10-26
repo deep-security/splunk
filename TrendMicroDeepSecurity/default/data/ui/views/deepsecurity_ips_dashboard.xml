@@ -15,7 +15,7 @@
       <map>
         <title>Intrusion Prevention Events by Location</title>
         <search>
-          <query>sourcetype=deepsecurity-intrusion_prevention src!="N/A" | iplocation src | geostats count by src globallimit=0 | sort -count</query>
+          <query>(sourcetype=deepsecurity-intrusion_prevention OR sourcetype=deepsecurity-intrusion_prevention:json) src!="N/A" | iplocation src | geostats count by src globallimit=0 | sort -count</query>
           <earliest>$timeframe.earliest$</earliest>
           <latest>$timeframe.latest$</latest>
         </search>
@@ -26,7 +26,7 @@
     <panel>
       <chart>
         <title>Intrusion Prevention Event History</title>
-        <searchString>sourcetype=deepsecurity-intrusion_prevention | timechart count by act limit=10</searchString>
+        <searchString>(sourcetype=deepsecurity-intrusion_prevention OR sourcetype=deepsecurity-intrusion_prevention:json) | timechart count by action limit=10</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -56,7 +56,7 @@
     <panel>
       <table>
         <title>IPS Activity (Prevented)</title>
-        <searchString>sourcetype=deepsecurity-intrusion_prevention act="Reset"| top limit=5 cef_rulename | rename cef_rulename AS "Event Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-intrusion_prevention OR sourcetype=deepsecurity-intrusion_prevention:json) (act="Reset" OR ActionString="Reset") | top limit=5 signature | rename signature AS "Event Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -69,7 +69,7 @@
     <panel>
       <table>
         <title>IPS Activity (Detected)</title>
-        <searchString>sourcetype=deepsecurity-intrusion_prevention act="IDS:Reset"| top limit=5 cef_rulename | rename cef_rulename AS "Event Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-intrusion_prevention OR sourcetype=deepsecurity-intrusion_prevention:json) (act="IDS:Reset" OR ActionString="Detect Only: Reset") | top limit=5 signature | rename signature AS "Event Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -84,7 +84,7 @@
     <panel>
       <table>
         <title>IPS IP Activity (Prevented)</title>
-        <searchString>sourcetype=deepsecurity-intrusion_prevention act="Reset" | top limit=5 src | rename src AS "Source IP" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-intrusion_prevention OR sourcetype=deepsecurity-intrusion_prevention:json) (act="Reset" OR ActionString="Reset") | top limit=5 src | rename src AS "Source IP" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -97,7 +97,7 @@
     <panel>
       <table>
         <title>IPS IP Activity (Detected)</title>
-        <searchString>sourcetype=deepsecurity-intrusion_prevention act="IDS:Reset" | top limit=5 src | rename src AS "Source IP" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-intrusion_prevention OR sourcetype=deepsecurity-intrusion_prevention:json) (act="IDS:Reset" OR ActionString="Detect Only: Reset") | top limit=5 src | rename src AS "Source IP" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -112,7 +112,7 @@
     <panel>
       <table>
         <title>IPS Computer Activity (Prevented)</title>
-        <searchString>sourcetype=deepsecurity-intrusion_prevention act="Reset" | top limit=5 dvchost | rename dvchost AS "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-intrusion_prevention OR sourcetype=deepsecurity-intrusion_prevention:json) (act="Reset" OR ActionString="Reset") | top limit=5 dvchost | rename dvchost AS "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -125,7 +125,7 @@
     <panel>
       <table>
         <title>IPS Computer Activity (Detected)</title>
-        <searchString>sourcetype=deepsecurity-intrusion_prevention act="IDS:Reset" | top limit=5 dvchost | rename dvchost AS "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-intrusion_prevention OR sourcetype=deepsecurity-intrusion_prevention:json) (act="IDS:Reset" OR ActionString="Detect Only: Reset") | top limit=5 dvchost | rename dvchost AS "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>

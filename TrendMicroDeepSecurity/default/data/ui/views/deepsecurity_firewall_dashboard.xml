@@ -15,7 +15,7 @@
       <map>
         <title>Firewall Events by Location</title>
         <search>
-          <query>sourcetype=deepsecurity-firewall src!="N/A" | iplocation src | geostats count by src globallimit=0 | sort -count</query>
+          <query>(sourcetype=deepsecurity-firewall OR sourcetype=deepsecurity-firewall:json) src!="N/A" | iplocation src | geostats count by src globallimit=0 | sort -count</query>
           <earliest>$timeframe.earliest$</earliest>
           <latest>$timeframe.latest$</latest>
         </search>
@@ -35,7 +35,7 @@
     <panel>
       <chart>
         <title>Firewall Event History</title>
-        <searchString>sourcetype=deepsecurity-firewall | timechart count by act limit=10</searchString>
+        <searchString>(sourcetype=deepsecurity-firewall OR sourcetype=deepsecurity-firewall:json) | timechart count by action limit=10</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -65,7 +65,7 @@
     <panel>
       <table>
         <title>Firewall Activity (Prevented)</title>
-        <searchString>sourcetype=deepsecurity-firewall act="Deny"| top limit=5 cef_rulename | rename cef_rulename AS "Event Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-firewall OR sourcetype=deepsecurity-firewall:json) action="blocked"| top limit=5 rule | rename rule AS "Event Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -78,7 +78,7 @@
     <panel>
       <table>
         <title>Firewall Activity (Detected)</title>
-        <searchString>sourcetype=deepsecurity-firewall act="IDS:Deny"| top limit=5 cef_rulename | rename cef_rulename AS "Event Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-firewall OR sourcetype=deepsecurity-firewall:json) (act="IDS:Deny" OR ActionString="Detect Only: Deny") | top limit=5 rule | rename rule AS "Event Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -93,7 +93,7 @@
     <panel>
       <table>
         <title>Firewall IP Activity (Prevented)</title>
-        <searchString>sourcetype=deepsecurity-firewall act="Deny" src!="N/A"| top limit=5 src  | rename src AS "Source IP" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-firewall OR sourcetype=deepsecurity-firewall:json) action="blocked" src!="N/A"| top limit=5 src | rename src AS "Source IP" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -106,7 +106,7 @@
     <panel>
       <table>
         <title>Firewall IP Activity (Detected)</title>
-        <searchString>sourcetype=deepsecurity-firewall act="IDS:Deny" src!="N/A"| top limit=5 src | rename src AS "Source IP" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-firewall OR sourcetype=deepsecurity-firewall:json) (act="IDS:Deny" OR ActionString="Detect Only: Deny") src!="N/A" | top limit=5 src | rename src AS "Source IP" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -121,7 +121,7 @@
     <panel>
       <table>
         <title>Firewall Computer Activity (Prevented)</title>
-        <searchString>sourcetype=deepsecurity-firewall act="Deny" | top limit=5 dvchost | rename dvchost AS "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-firewall OR sourcetype=deepsecurity-firewall:json) action="blocked" | top limit=5 dvchost | rename dvchost AS "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -134,7 +134,7 @@
     <panel>
       <table>
         <title>Firewall Computer Activity (Detected)</title>
-        <searchString>sourcetype=deepsecurity-firewall act="IDS:Deny" | top limit=5 dvchost | rename dvchost AS "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-firewall OR sourcetype=deepsecurity-firewall:json) (act="IDS:Deny" OR ActionString="Detect Only: Deny") | top limit=5 dvchost | rename dvchost AS "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -149,7 +149,7 @@
     <panel>
       <table>
         <title>Firewall Port Activity (Prevented)</title>
-        <searchString>sourcetype=deepsecurity-firewall act="Deny" dpt &gt; 0 dpt!="N/A"| top limit=5 dpt | rename dpt as "Destination Port" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-firewall OR sourcetype=deepsecurity-firewall:json) action="blocked" dest_port &gt; 0 dest_port!="N/A"| top limit=5 dest_port | rename dest_port as "Destination Port" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -162,7 +162,7 @@
     <panel>
       <table>
         <title>Firewall Port Activity (Detected)</title>
-        <searchString>sourcetype=deepsecurity-firewall act="IDS:Deny" dpt &gt; 0 dpt!="N/A"| top limit=5 dpt | rename dpt as "Destination Port" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-firewall OR sourcetype=deepsecurity-firewall:json) (act="IDS:Deny" OR ActionString="Detect Only: Deny") dest_port &gt; 0 dest_port!="N/A"| top limit=5 dest_port | rename dest_port as "Destination Port" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>

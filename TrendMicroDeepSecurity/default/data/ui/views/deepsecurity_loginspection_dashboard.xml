@@ -14,7 +14,7 @@
     <panel>
       <chart>
         <title>Log Inspection Event History</title>
-        <searchString>sourcetype=deepsecurity-log_inspection  | eval severity=case(cef_severity=3, "Low", cef_severity=6, "Medium", cef_severity=8, "High", cef_severity=10, "Critical")| timechart count by severity limit=10</searchString>
+        <searchString>(sourcetype=deepsecurity-log_inspection OR sourcetype=deepsecurity-log_inspection:json) | timechart count by severity limit=10</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -44,7 +44,7 @@
     <panel>
       <table>
         <title>Log Inspection Description Activity</title>
-        <searchString>sourcetype=deepsecurity-log_inspection  | top limit=5 LI_Description | rename LI_Description AS "Event Description" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-log_inspection OR sourcetype=deepsecurity-log_inspection:json) | top limit=5 description | rename description AS "Event Description" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -57,7 +57,7 @@
     <panel>
       <table>
         <title>Log Inspection Activity</title>
-        <searchString>sourcetype=deepsecurity-log_inspection| top limit=5 cef_rulename | rename cef_rulename AS "Event Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-log_inspection OR sourcetype=deepsecurity-log_inspection:json) | top limit=5 signature | rename signature AS "Event Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
@@ -70,7 +70,7 @@
     <panel>
       <table>
         <title>Log Inspection Computer Activity</title>
-        <searchString>sourcetype=deepsecurity-log_inspection| top limit=5 dvchost | rename dvchost AS "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
+        <searchString>(sourcetype=deepsecurity-log_inspection OR sourcetype=deepsecurity-log_inspection:json) | top limit=5 dvchost | rename dvchost AS "Computer Name" count AS "Event Count" percent AS "Percent of Total"</searchString>
         <earliestTime>$timeframe.earliest$</earliestTime>
         <latestTime>$timeframe.latest$</latestTime>
         <option name="wrap">true</option>
